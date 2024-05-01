@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <form action="{{ url_for('index') }}" method="post">
+        <label for="visualization_type">Select Visualization:</label>
+        <select name="visualization_type" id="visualization_type">
+            <option value="product_distribution">Distribution of Product Line</option>
+            <option value="profitability">Total Profitability by Product Line</option>
+            <option value="revenue">Total Revenue by Product Line</option>
+            <option value="sales_volume">Total Sales Volume by Product Line</option>
+            <option value="sales_volume_by_gender">Sales Volume by Product Line, Segmented by Gender</option>
+            <option value="monthly_income">Monthly Income by Product Line</option>
+            <option value="gross_income_by_gender">Gross Income by Product Line, Grouped by Gender</option>
+            <option value="monthly_gross_income">Monthly Gross Income</option>
+            <option value="total_gross_income_by_branch">Total Gross Income by Branch</option>
+            <option value="average_ratings_by_product_lines">Average Ratings by Product Lines</option>
+            <option value="product_lines_gross_income">Product Lines Gross Income</option>
+            <option value="average_ratings_vs_sales_volume">Average Rating vs. Sales Volume</option>
+            <option value="cogs_and_gross_income">Cost of Goods Sold and Gross Income</option>
+            <option value="correlation_heatmap">Correlation Heatmap</option>
+        </select>
+        <input type="submit" value="Generate Visualization">
+    </form>
+    <!-- Display selected visualization, plot, and explanation -->
+    {% if plot_type %}
+    <h2>{{ plot_type }}</h2>
+    {% endif %}
+
+    {% if plot %}
+    {{ plot | safe }}
+    <br>
+    {% endif %}
+
+    {% if explanation %}
+    <p>{{ explanation | safe }}</p>
+    <br>
+    {% endif %}
+
+    <a href="{{ url_for('predict_sales') }}">Predict Sales</a>
+    <a href="{{ url_for('view_dataset') }}">View Dataset</a>
+</body>
+</html>

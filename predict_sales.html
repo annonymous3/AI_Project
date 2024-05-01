@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Sales</title>
+</head>
+<body>
+    <h1>Predict Sales</h1>
+    <form action="{{ url_for('predict_sales') }}" method="post">
+        <label for="unit_price">Unit Price:</label>
+        <input type="text" id="unit_price" name="unit_price" value="{{ unit_price }}" required>
+        <br>
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" value="{{ quantity }}" required>
+        <br>
+        <label for="tax_percent">Tax Percent:</label>
+        <input type="text" id="tax_percent" name="tax_percent" value="{{ tax_percent }}" required>
+        <br>
+        <label for="gross_income">Gross Income:</label>
+        <input type="text" id="gross_income" name="gross_income" value="{{ gross_income }}" required>
+        <br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if mse %}
+    <h3>Mean Squared Error</h3>
+    <p>{{ mse }}</p>
+    {% endif %}
+
+    {% if prediction %}
+    <h3>Predicted Sales</h3>
+    <p>{{ prediction }}</p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}">Back to Homepage</a>
+</body>
+</html>
